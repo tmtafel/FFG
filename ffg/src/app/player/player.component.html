@@ -1,0 +1,18 @@
+<div *ngIf="player">
+  <span class="id d-none">{{id}}</span>
+  <div class="col-1 pl-0 pr-2 d-flex align-items-center justify-content-center">
+    <h4 class="position m-0">{{currentPosition}}</h4>
+  </div>
+  <div class="col-5 px-2 d-flex align-items-center justify-content-start">
+    <div class="d-flex flex-column">
+      <p class="name m-0">{{firstName}} {{lastName}}</p>
+    </div>
+  </div>
+  <div class="col-3 px-2 d-flex align-items-center justify-content-center">
+    <h5 class="thru m-0"></h5>
+  </div>
+  <div class="col-3 pl-2 pr-0 d-flex flex-column align-items-end justify-content-between">
+    <h6 class="score m-0">{{score}}</h6>
+    <p class="m-0"><small class="captain font-weight-bold"></small></p>
+  </div>
+</div>
