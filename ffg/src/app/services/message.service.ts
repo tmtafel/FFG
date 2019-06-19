@@ -6,11 +6,8 @@ import { Injectable } from '@angular/core';
 export class MessageService {
   messages: string[] = [];
 
-  add(message: string) {
+  add(message: string, secondsShown: number = 2) {
     this.messages.push(message);
-  }
-
-  clear() {
-    this.messages = [];
+    setTimeout(() => this.messages.splice(0, 1), secondsShown * 1000);
   }
 }

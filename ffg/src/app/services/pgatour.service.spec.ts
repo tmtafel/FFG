@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StatisticService } from './statistic.service';
+import { PgatourService } from './pgatour.service';
 
-describe('StatisticService', () => {
+describe('PgatourService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: StatisticService = TestBed.get(StatisticService);
+    const service: PgatourService = TestBed.get(PgatourService);
     expect(service).toBeTruthy();
   });
 });

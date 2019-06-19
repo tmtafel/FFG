@@ -1,0 +1,13 @@
+<div *ngIf="leaderboardReady">
+  <div class="row">
+    <h2 class="col-12 mt-5">{{tournamentName}}</h2>
+  </div>
+  <div class="row">
+    <h4 class="col-12">{{lastUpdated | date:'h:mm a '}}</h4>
+  </div>
+  <ul class="list list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let player of leaderboard.players">
+      <app-player [player]="player"></app-player>
+    </li>
+  </ul>
+</div>

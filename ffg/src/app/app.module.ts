@@ -4,23 +4,27 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LeaderboardComponent } from './leaderboard/leaderboard.component';
-import { MessagesComponent } from './messages/messages.component';
-import { PlayerComponent } from './player/player.component';
-import { AlertModule } from 'ngx-bootstrap';
+import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { PlayerComponent } from './components/player/player.component';
+import { RoundComponent } from './components/round/round.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CourseComponent } from './components/course/course.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeaderboardComponent,
     MessagesComponent,
-    PlayerComponent
+    PlayerComponent,
+    RoundComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AlertModule.forRoot()
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,0 @@
-<div *ngIf="ready">
-  <h4>{{lastUpdated | date:'h:mm a '}}</h4>
-  <ul class="list list-group list-group-flush">
-    <li class="list-group-item px-0 py-1 d-flex" *ngFor="let player of leaderboard.players">
-      <app-player [player]="player"></app-player>
-    </li>
-  </ul>
-</div>
