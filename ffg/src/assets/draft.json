@@ -1,0 +1,31 @@
+{
+  "Teams": [{
+      "Captain": "Will",
+      "Players": []
+    },
+    {
+      "Captain": "Billy",
+      "Players": []
+    },
+    {
+      "Captain": "Jackson",
+      "Players": []
+    },
+    {
+      "Captain": "Tosh",
+      "Players": []
+    },
+    {
+      "Captain": "Cassidy",
+      "Players": []
+    },
+    {
+      "Captain": "Chris",
+      "Players": []
+    },
+    {
+      "Captain": "Brooks",
+      "Players": []
+    }
+  ]
+}
