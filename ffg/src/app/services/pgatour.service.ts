@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Convert, StatJson, CourseJson } from '../interfaces/PgaData';
@@ -14,8 +13,7 @@ export class PgatourService {
   private courseUrl = 'https://www.pgatour.com/content/dam/pgatour/json/tournament/course.json';
 
   constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+    private http: HttpClient) { }
 
   getStatistics(): Observable<StatJson> {
     this.log('fetching statistics....');
@@ -45,6 +43,6 @@ export class PgatourService {
   }
 
   private log(message: string) {
-    this.messageService.add(`PGA Tour Service: ${message}`);
+    console.log(`PGA Tour Service: ${message}`);
   }
 }
