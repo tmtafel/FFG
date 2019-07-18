@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NavbarService } from 'src/app/services/navbar.service';
-
+import { Component, OnInit } from '@angular/core';
+import { Router, Route } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +7,25 @@ import { NavbarService } from 'src/app/services/navbar.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(public navbarService: NavbarService) { }
+  routes: string[];
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.routes = [];
+    this.printpath('', this.router.config);
+  }
+  printpath(parent: string, config: Route[]) {
+    config.forEach(element => {
+      const route = element;
+      this.routes.push(parent + '/' + route.path);
+      if (route.children) {
+        const currentPath = route.path ? parent + '/' + route.path : parent;
+        this.printpath(currentPath, route.children);
+      }
+    });
+  }
+
+  getRouteName(routeName: string): string {
+    return routeName.replace('/', ' ').trim();
   }
 }

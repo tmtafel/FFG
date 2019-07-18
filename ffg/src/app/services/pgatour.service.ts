@@ -1,38 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Convert, StatJson, CourseJson } from '../interfaces/PgaData';
+import { ConvertPgaData, PGAData } from '../interfaces/PgaData';
+import { ConvertSchedule, ScheduleData } from '../interfaces/ScheduleData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PgatourService {
+  private scheduleUrl = 'https://statdata.pgatour.com/r/current/schedule-v2.json';
 
-  private statsUrl = 'https://statdata.pgatour.com/r/current/leaderboard-v2mini.json';
-  private courseUrl = 'https://www.pgatour.com/content/dam/pgatour/json/tournament/course.json';
+  constructor(private http: HttpClient) { }
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
 
-  getStatistics(): Observable<StatJson> {
+  getStatistics(tournamentId: any): Observable<PGAData> {
     this.log('fetching statistics....');
-    return this.http.get<StatJson>(this.statsUrl)
+    return this.http.get<PGAData>('https://statdata.pgatour.com/r/' + tournamentId.toString() + '/leaderboard-v2mini.json')
       .pipe(
-        map(json => Convert.toStatData(JSON.stringify(json))),
+        map(json => ConvertPgaData.toPGAData(JSON.stringify(json))),
         tap(_ => this.log('fetched statistics')),
-        catchError(this.handleError<StatJson>('getLeaderboard'))
+        catchError(this.handleError<PGAData>('getStatistics'))
       );
   }
 
-  getCourseData(): Observable<CourseJson> {
-    return this.http.get<CourseJson>(this.courseUrl)
+  getSchedule(): Observable<ScheduleData> {
+    return this.http.get<ScheduleData>(this.scheduleUrl)
       .pipe(
-        map(json => Convert.toCourseData(JSON.stringify(json))),
-        tap(_ => this.log('fetched course')),
-        catchError(this.handleError<CourseJson>('getCourseData'))
+        map(json => ConvertSchedule.toScheduleData(JSON.stringify(json))),
+        tap(_ => this.log('fetched schedule')),
+        catchError(this.handleError<ScheduleData>('getSchedule'))
       );
   }
 
@@ -45,6 +42,6 @@ export class PgatourService {
   }
 
   private log(message: string) {
-    this.messageService.add(`PGA Tour Service: ${message}`);
+    console.log(`PGA Tour Service: ${message}`);
   }
 }
