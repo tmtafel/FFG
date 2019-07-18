@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Leaderboard } from '../../interfaces/Leaderboard';
 import { PgatourService } from '../../services/pgatour.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
+import { Leaderboard } from 'src/app/interfaces/PgaData';
 
 @Component({
   selector: 'app-leaderboard',
@@ -11,20 +12,21 @@ import { PgatourService } from '../../services/pgatour.service';
 export class LeaderboardComponent implements OnInit {
   leaderboardReady = false;
   leaderboard: Leaderboard = null;
-  lastUpdated: Date = null;
-  tournamentName: string;
-  constructor(private pgatourService: PgatourService) { }
+  year: number;
+  constructor(public firebaseService: FirebaseService, private pgatourService: PgatourService) { }
 
   ngOnInit() {
     this.getLeaderboard();
   }
 
   getLeaderboard(): void {
-    this.pgatourService.getStatistics().subscribe(statData => {
-      this.lastUpdated = statData.last_updated;
-      this.leaderboard = statData.leaderboard;
-      this.tournamentName = statData.leaderboard.tournament_name;
-      this.leaderboardReady = true;
+    this.pgatourService.getSchedule().subscribe(schedule => {
+      console.log(schedule);
     });
+    // this.pgatourService.getStatistics().subscribe(statData => {
+    //   console.log(statData);
+    //   this.leaderboard = statData.Leaderboards[0];
+    //   this.leaderboardReady = true;
+    // });
   }
 }
