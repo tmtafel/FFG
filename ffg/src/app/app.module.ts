@@ -9,23 +9,22 @@ import { AppComponent } from './app.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { PlayerComponent } from './components/player/player.component';
 
+
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
-import { DraftComponent } from './components/draft/draft.component';
-import { UsersComponent } from './components/users/users.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { DraftDetailsComponent } from './components/draft-details/draft-details.component';
+import { DraftModule } from './draft/draft.module';
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LeaderboardComponent,
     PlayerComponent,
-    DraftComponent,
-    UsersComponent,
-    NavbarComponent,
-    DraftDetailsComponent
+    HeaderComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,8 +32,10 @@ import { DraftDetailsComponent } from './components/draft-details/draft-details.
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    DraftModule
   ],
   providers: [],
   bootstrap: [AppComponent]

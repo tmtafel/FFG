@@ -4,9 +4,9 @@
   },
   "_comment": "This will be replaced with a separate file in the future.",
   "thisWeek": {
-    "weekNumber": "29",
-    "startDate": "2019-07-15",
-    "endDate": "2019-07-21"
+    "weekNumber": "30",
+    "startDate": "2019-07-22",
+    "endDate": "2019-07-28"
   },
   "currentYears": {
     "r": "2019",
@@ -3869,11 +3869,11 @@
         }],
         "champions": [{
           "isMember": "YES",
-          "plrNum": "32640",
+          "plrNum": "31557",
           "playerName": {
-            "first": "Troy",
+            "first": "Jim",
             "middle": "",
-            "last": "Merritt"
+            "last": "Herman"
           },
           "FedExCupWinnerShare": "300",
           "winningShare": "630,000.00"
@@ -3955,13 +3955,14 @@
         }],
         "champions": [{
           "isMember": "YES",
-          "plrNum": "25198",
+          "plrNum": "33204",
           "playerName": {
-            "first": "Francesco",
+            "first": "Shane",
             "middle": "",
-            "last": "Molinari"
+            "last": "Lowry"
           },
-          "winningShare": "1,890,000.00"
+          "FedExCupWinnerShare": "600",
+          "winningShare": "1,935,000.00"
         }],
         "links": {
           "trnLink": {
@@ -4014,7 +4015,7 @@
         "FedExCupPurse": "3,240",
         "FedExCupWinnerPoints": "550",
         "Purse": "10,250,000",
-        "winnersShare": "1,742,500",
+        "winnersShare": "1,745,000",
         "trnName": {
           "official": "World Golf Championships-FedEx St. Jude Invitational",
           "long": "World Golf Championships-FedEx St Jude Invitational",
@@ -8643,12 +8644,13 @@
         }],
         "champions": [{
           "isMember": "YES",
-          "plrNum": "27139",
+          "plrNum": "35658",
           "playerName": {
-            "first": "David",
+            "first": "Kristoffer",
             "middle": "",
-            "last": "Skinns"
+            "last": "Ventura"
           },
+          "FedExCupWinnerShare": "500",
           "winningShare": "108,000.00"
         }],
         "links": {
@@ -8699,8 +8701,8 @@
         "trnType": "STD",
         "subEvents": ["\n \n 07\n 25\n 2019\n \n \n 07\n 28\n 2019\n \n"],
         "": "",
-        "Purse": "675,000",
-        "winnersShare": "121,500",
+        "Purse": "700,000",
+        "winnersShare": "126,000",
         "trnName": {
           "official": "Price Cutter Charity Championship presented by Dr Pepper",
           "long": "Price Cutter Charity Championship presented by Dr Pepper",
@@ -11305,6 +11307,16 @@
           },
           "courseName": "Oakfield G&CC"
         }],
+        "champions": [{
+          "isMember": "YES",
+          "plrNum": "33015",
+          "playerName": {
+            "first": "Lorens",
+            "middle": "",
+            "last": "Chan"
+          },
+          "winningShare": "36,000.00"
+        }],
         "links": {
           "trnLink": {
             "isLinked": "y",
@@ -12793,6 +12805,16 @@
           },
           "courseName": "Nansha Golf Club"
         }],
+        "champions": [{
+          "isMember": "NO",
+          "plrNum": "51950",
+          "playerName": {
+            "first": "Max",
+            "middle": "",
+            "last": "McGreevy"
+          },
+          "winningShare": "288,000.00"
+        }],
         "links": {
           "trnLink": {
             "isLinked": "n",
@@ -12839,7 +12861,7 @@
         "timeZone": "China",
         "trnNum": "140",
         "trnType": "STD",
-        "subEvents": [],
+        "subEvents": ["\n \n 07\n 25\n 2019\n \n \n 07\n 28\n 2019\n \n"],
         "": "",
         "Purse": "1,600,000",
         "winnersShare": "288,000",
@@ -13265,7 +13287,7 @@
           "host": "Yes",
           "isTpc": "No",
           "number": "746",
-          "rank": "23",
+          "rank": "24",
           "location": {
             "state": "MS",
             "city": "Jackson",
@@ -13350,7 +13372,7 @@
           "host": "Yes",
           "isTpc": "No",
           "number": "552",
-          "rank": "25",
+          "rank": "26",
           "location": {
             "state": "CA",
             "city": "Napa",
@@ -13435,7 +13457,7 @@
           "host": "Yes",
           "isTpc": "Yes",
           "number": "538",
-          "rank": "34",
+          "rank": "35",
           "location": {
             "state": "NV",
             "city": "Las Vegas",
@@ -13605,7 +13627,7 @@
           "host": "Yes",
           "isTpc": "No",
           "number": "242",
-          "rank": "27",
+          "rank": "28",
           "location": {
             "state": "",
             "city": "Jeju Island",
@@ -13926,7 +13948,7 @@
           "host": "Yes",
           "isTpc": "No",
           "number": "733",
-          "rank": "35",
+          "rank": "36",
           "location": {
             "state": "",
             "city": "Playa del Carmen",
@@ -14012,7 +14034,7 @@
           "host": "Yes",
           "isTpc": "No",
           "number": "776",
-          "rank": "29",
+          "rank": "30",
           "location": {
             "state": "GA",
             "city": "Sea Island",
@@ -14023,7 +14045,7 @@
           "host": "No",
           "isTpc": "No",
           "number": "231",
-          "rank": "33",
+          "rank": "34",
           "location": {
             "state": "GA",
             "city": "Sea Island",

@@ -4,21 +4,19 @@ export class Tournament {
     name: string;
     year: string;
     tId: string;
-    details: Trn;
+    docId: string;
 
-    constructor(tournament: Trn) {
-        this.name = tournament.trnName.official;
-        this.year = tournament.year;
-        this.tId = tournament.permNum;
-        this.details = tournament;
+    constructor(name: string, year: string, id: string) {
+        this.name = name;
+        this.year = year;
+        this.tId = id;
     }
 
-    getObject(): any {
+    getDocumentObject(): any {
         return {
             name: this.name,
             year: this.year,
-            tId: this.tId,
-            details: this.details
+            tId: this.tId
         };
     }
 }

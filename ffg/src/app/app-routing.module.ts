@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DraftComponent } from './components/draft/draft.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
-import { UsersComponent } from './components/users/users.component';
+import { AppGuard } from './app.guard';
+import { LoginComponent } from './login/login.component';
+import { ListComponent } from './draft/list/list.component';
 
 const routes: Routes = [
-  { path: '', component: LeaderboardComponent },
-  { path: 'draft', component: DraftComponent },
-  { path: 'draft/:draftId', component: DraftComponent },
-  { path: 'leaderboard', component: LeaderboardComponent },
-  { path: 'users', component: UsersComponent }
+  {
+    path: '',
+    component: LeaderboardComponent
+  },
+  {
+    path: 'draft',
+    component: ListComponent,
+    canActivate: [AppGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  }
 ];
 
 @NgModule({

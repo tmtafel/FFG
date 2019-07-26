@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of, pipe } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { ConvertPgaData, PGAData } from '../interfaces/PgaData';
-import { ConvertSchedule, ScheduleData } from '../interfaces/ScheduleData';
+import { ConvertPgaData, PGAData } from 'src/app/interfaces/PgaData';
+import { ConvertSchedule, Trn, ScheduleData } from 'src/app/interfaces/ScheduleData';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,7 @@ export class PgatourService {
 
   constructor(private http: HttpClient) { }
 
-
   getStatistics(tournamentId: any): Observable<PGAData> {
-    this.log('fetching statistics....');
     return this.http.get<PGAData>('https://statdata.pgatour.com/r/' + tournamentId.toString() + '/leaderboard-v2mini.json')
       .pipe(
         map(json => ConvertPgaData.toPGAData(JSON.stringify(json))),
@@ -24,14 +22,15 @@ export class PgatourService {
       );
   }
 
-  getSchedule(): Observable<ScheduleData> {
+  getScheduleData(): Observable<ScheduleData> {
     return this.http.get<ScheduleData>(this.scheduleUrl)
       .pipe(
-        map(json => ConvertSchedule.toScheduleData(JSON.stringify(json))),
+        map(json => json as ScheduleData),
         tap(_ => this.log('fetched schedule')),
         catchError(this.handleError<ScheduleData>('getSchedule'))
       );
   }
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
