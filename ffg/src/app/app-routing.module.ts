@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { AppGuard } from './app.guard';
-import { LoginComponent } from './login/login.component';
 import { ListComponent } from './draft/list/list.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   {
@@ -16,8 +16,8 @@ const routes: Routes = [
     canActivate: [AppGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'users',
+    component: UsersComponent
   }
 ];
 

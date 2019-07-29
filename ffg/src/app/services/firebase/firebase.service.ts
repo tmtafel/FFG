@@ -38,31 +38,9 @@ export class FirebaseService {
     });
   }
 
-      rToDraft(draftId: string, userId: string): void {
+  userToDraft(draftId: string, userId: string): void {
     this.getTournamentById(draftId).subscribe(draft => {
-        console.log(draft);
+      console.log(draft);
     });
-  }
-
-  getUsers(): Observable<User[]> {
-    return this.db.collection<User>('users').valueChanges();
-  }
-
-  createUser(value): void {
-    this.db.collection('users').add({
-      name: value.name
-    });
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      this.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
-
-  private log(message: string) {
-    console.log(`PGA Tour Service: ${message}`);
   }
 }

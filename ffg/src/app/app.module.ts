@@ -16,7 +16,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { DraftModule } from './draft/draft.module';
 import { HeaderComponent } from './header/header.component';
-import { LoginComponent } from './login/login.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { LoginComponent } from './login/login.component';
     LeaderboardComponent,
     PlayerComponent,
     HeaderComponent,
-    LoginComponent
+    UsersComponent
   ],
   imports: [
     BrowserModule,

@@ -7,13 +7,11 @@ import { DetailsComponent } from './details/details.component';
 const routes: Routes = [
     {
         path: 'draft',
-        component: ListComponent,
-        children: [
-            {
-                path: ':draftId',
-                component: DetailsComponent
-            }
-        ]
+        component: ListComponent
+    },
+    {
+        path: 'draft/:draftId',
+        component: DetailsComponent
     }
 ];
 @NgModule({

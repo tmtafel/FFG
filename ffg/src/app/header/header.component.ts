@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,30 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {
+  email: string;
+
+
+  constructor(private authService: AuthService, private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    if (this.authService.isLoggedIn) {
+      this.authService.afAuth.user.subscribe(e => {
+        this.email = e.email;
+      });
+    }
   }
 
+  open(content) {
+    this.modalService.open(content);
+  }
+
+  login(userEmail, userPassword): void {
+    this.authService.login(userEmail.value, userPassword.value).then(result => {
+      if (this.authService.isLoggedIn) {
+        this.email = this.authService.user.email;
+        this.modalService.dismissAll();
+      }
+    });
+  }
 }
