@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FirebaseUISignInSuccessWithAuthResult, FirebaseUISignInFailure } from 'firebaseui-angular';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isLoggedIn) {
       this.authService.afAuth.user.subscribe(e => {
-        this.email = e.email;
+        if (e !== null) {
+          this.email = e.email;
+        }
       });
     }
   }
@@ -26,12 +29,16 @@ export class HeaderComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  login(userEmail, userPassword): void {
-    this.authService.login(userEmail.value, userPassword.value).then(result => {
-      if (this.authService.isLoggedIn) {
-        this.email = this.authService.user.email;
-        this.modalService.dismissAll();
-      }
-    });
+  logout() {
+    localStorage.removeItem('user');
+    this.authService.logout();
+  }
+  successCallback(signInSuccessData: FirebaseUISignInSuccessWithAuthResult) {
+    this.email = signInSuccessData.authResult.user.email;
+    this.modalService.dismissAll();
+  }
+
+  errorCallback(errorData: FirebaseUISignInFailure) {
+    console.log(errorData);
   }
 }

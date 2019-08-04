@@ -11,15 +11,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
   user: User;
   constructor(public afAuth: AngularFireAuth, public router: Router) {
-    this.afAuth.authState.subscribe(user => {
-      console.log('constructer of auth service hit');
-      if (user) {
-        this.user = user;
-        localStorage.setItem('user', JSON.stringify(this.user));
-      } else {
-        localStorage.setItem('user', null);
-      }
-    });
+    this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
   }
 
   async login(email: string, password: string) {
@@ -41,7 +33,12 @@ export class AuthService {
     return user !== null;
   }
 
-  // getUsers(): void{
-  //   return this.afAuth.auth.app.database
-  // }
+  private firebaseAuthChangeListener(user) {
+    if (user) {
+      this.user = user;
+      localStorage.setItem('user', JSON.stringify(this.user));
+    } else {
+      localStorage.setItem('user', null);
+    }
+  }
 }

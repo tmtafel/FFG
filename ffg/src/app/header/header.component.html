@@ -8,10 +8,10 @@
             <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Login</button>
           </div>
           <div *ngIf="authService.isLoggedIn" ngbDropdown class="d-inline-block">
-            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Hello {{email}}</button>
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Hello <span *ngIf="email">{{email}}</span></button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <a ngbDropdownItem href="https://console.firebase.google.com/project/ffgolf/database" target="_blank">View Database</a>
-              <a ngbDropdownItem (click)="authService.logout()">Logout</a>
+              <a ngbDropdownItem (click)="logout()">Logout</a>
             </div>
           </div>
         </li>
@@ -26,9 +26,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-12">
-          <input type="text" class="form-control mb-2" placeholder="Email" #userEmail required autofocus>
-          <input type="password" class="form-control mb-2" placeholder="Password" #userPassword required>
-          <button class="btn btn-lg btn-primary btn-block mb-1" (click)="login(userEmail, userPassword)">Login</button>
+          <firebase-ui (signInSuccessWithAuthResult)="successCallback($event)" (signInFailure)="errorCallback($event)"></firebase-ui>
         </div>
       </div>
     </div>

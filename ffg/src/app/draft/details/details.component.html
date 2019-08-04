@@ -1,3 +1,14 @@
 <div *ngIf="tournament !== null">
   <h2 class="text-center">{{tournament.year}} {{tournament.name}}</h2>
 </div>
+<div *ngIf="teams">
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let team of teams">
+      <div class="d-flex justify-content-between">
+        <h4>{{team.email}}</h4>
+        <button *ngIf="!team.inDraft" class="btn btn-primary btn-sm" (click)="addTeamToDraft(team,tournament)">Add to Draft</button>
+        <button *ngIf="team.inDraft" class="btn btn-primary btn-sm" (click)="removeTeamFromDraft(team,tournament)">Remove from Draft</button>
+      </div>
+    </li>
+  </ul>
+</div>
