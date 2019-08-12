@@ -2,6 +2,7 @@
   <div class="container">
     <a class="navbar-brand" href="/">FFG</a>
     <div class="collapse navbar-collapse" id="navbarText">
+
       <ul class="navbar-nav w-100">
         <li class="nav-item ml-auto">
           <div *ngIf="!authService.isLoggedIn">
@@ -10,6 +11,7 @@
           <div *ngIf="authService.isLoggedIn" ngbDropdown class="d-inline-block">
             <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Hello <span *ngIf="email">{{email}}</span></button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <a ngbDropdownItem href="draft">Drafts</a>
               <a ngbDropdownItem href="https://console.firebase.google.com/project/ffgolf/database" target="_blank">View Database</a>
               <a ngbDropdownItem (click)="logout()">Logout</a>
             </div>

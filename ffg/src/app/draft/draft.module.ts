@@ -5,11 +5,13 @@ import { DraftRoutingModule } from './draft-routing.module';
 
 import { ListComponent } from './list/list.component';
 import { DetailsComponent } from './details/details.component';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
   declarations: [
     ListComponent,
-    DetailsComponent
+    DetailsComponent,
+    TeamComponent
   ],
   imports: [
     CommonModule,

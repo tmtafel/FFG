@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Trn } from 'src/app/interfaces/ScheduleData';
-import { Tournament } from 'src/app/interfaces/tournament';
 import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 import { PgatourService } from 'src/app/services/pgatour/pgatour.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Draft } from 'src/app/interfaces/firebase/Draft';
+import { Router } from '@angular/router';
+import { DocumentChangeAction } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-list',
@@ -11,54 +13,41 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+  upcomming: Trn[];
+  drafts: DocumentChangeAction<Draft>[];
 
-  upcomming: Trn[] = [];
-  past: Trn[] = [];
-  drafts: Tournament[] = [];
-
-  constructor(public firebaseService: FirebaseService, private pgatourService: PgatourService, private modalService: NgbModal) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(public firebaseService: FirebaseService, private pgatourService: PgatourService, private modalService: NgbModal, private router: Router) { }
 
   ngOnInit() {
-    this.getTournamentDocuments();
+    this.firebaseService.getAllDrafts().subscribe(drafts => {
+      this.drafts = drafts;
+    });
   }
 
-  getAllTournaments(): void {
+  open(content) {
+    this.upcomming = [];
     this.pgatourService.getScheduleData().subscribe(schedule => {
       const year = schedule.years.filter(y => y.year === schedule.currentYears.r)[0];
       const tour = year.tours.filter(y => y.tourCodeLc === 'r')[0];
       const trns = tour.trns.filter(t => t.primaryEvent === 'Y');
-      const ids = this.drafts.map(d => d.tId);
+      const ids = this.drafts.map(d => d.payload.doc.id);
       const tournaments = trns.filter(trn => !ids.includes(trn.permNum));
       const now = new Date(Date.now());
       tournaments.map(trn => {
         if (new Date(trn.date.start) > now) {
           this.upcomming.push(trn);
-        } else {
-          this.past.push(trn);
         }
       });
-
-    });
-  }
-
-  getTournamentDocuments(): void {
-    this.firebaseService.getTournamentDocuments().subscribe(tDocuments => {
-      tDocuments.forEach(tDoc => {
-        const docId = tDoc.payload.doc.id;
-        const tournament = tDoc.payload.doc.data();
-        tournament.docId = docId;
-        this.drafts.push(tournament);
-      });
+      this.modalService.open(content, { size: 'lg' });
     });
   }
 
   createNewDraft(tournament: Trn) {
-    this.firebaseService.createDraft(tournament);
-  }
-
-  open(content) {
-    this.getAllTournaments();
-    this.modalService.open(content, { size: 'lg' });
+    this.firebaseService.createDraft(tournament).finally(() => {
+      console.log('finished');
+    });
+    this.modalService.dismissAll();
   }
 
 }

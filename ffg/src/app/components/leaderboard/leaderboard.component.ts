@@ -25,7 +25,7 @@ export class LeaderboardComponent implements OnInit {
       const tour = year.tours.filter(y => y.tourCodeLc === 'r')[0];
       const tournament = tour.trns.filter(t => t.primaryEvent === 'Y' && t.date.weekNumber === currentWeek)[0];
       if (tournament !== null) {
-        this.pgatourService.getStatistics(tournament.permNum).subscribe(statData => {
+        this.pgatourService.getLeaderbaord(tournament.permNum).subscribe(statData => {
           console.log(statData);
           this.leaderboard = statData.leaderboard;
         });

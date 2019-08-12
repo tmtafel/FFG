@@ -1,7 +1,6 @@
+import { User } from 'firebase';
+
 export class Team {
-    email: string;
-    id: string;
-    docId: string;
-    inDraft = false;
+    user: User;
     playerIds: number[] = [];
 }
