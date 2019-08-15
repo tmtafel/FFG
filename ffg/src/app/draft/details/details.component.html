@@ -1,0 +1,16 @@
+<div *ngIf="draft">
+  <h2 class="text-center">{{draft.year}} {{draft.name}}</h2>
+  <div class="d-flex justify-content-end">
+    <button (click)="startDraft()" class="btn btn-primary btn-lg">Start Draft</button>
+  </div>
+  <ul class="list-group py-4" *ngIf="draft.draftHasStarted">
+    <li class="list-group-item" *ngFor="let team of draftOrder">
+      <h3>Draft Has started</h3>
+    </li>
+  </ul>
+  <ul class="list-group py-4" *ngIf="!draft.draftHasStarted">
+    <li class="list-group-item" *ngFor="let user of users | async">
+      <app-team [user]="user"></app-team>
+    </li>
+  </ul>
+</div>

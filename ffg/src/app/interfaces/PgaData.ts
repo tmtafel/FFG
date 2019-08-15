@@ -137,14 +137,3 @@ export interface Round {
 export enum Status {
     Active = 'active',
 }
-
-// Converts JSON strings to/from your types
-export class ConvertPgaData {
-    public static toPGAData(json: string): PGAData {
-        return JSON.parse(json);
-    }
-
-    public static pGADataToJson(value: PGAData): string {
-        return JSON.stringify(value);
-    }
-}

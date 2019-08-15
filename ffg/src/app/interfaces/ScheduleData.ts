@@ -178,11 +178,15 @@ export enum TrnType {
 
 // Converts JSON strings to/from your types
 export class ConvertSchedule {
-    public static toScheduleData(json: string): ScheduleData {
-        return JSON.parse(json);
+    public static toTournamentsArray(json: any): Trn[] {
+        const schedule = json as ScheduleData;
+        const year = schedule.years.filter(y => y.year === schedule.currentYears.r)[0];
+        const tour = year.tours.filter(y => y.tourCodeLc === 'r')[0];
+        return tour.trns.filter(t => t.primaryEvent === 'Y');
     }
 
-    public static scheduleDataToJson(value: ScheduleData): string {
-        return JSON.stringify(value);
+    public static toScheduleData(json: any): number {
+        const schedule = json as ScheduleData;
+        return parseInt(schedule.thisWeek.weekNumber, 0);
     }
 }
