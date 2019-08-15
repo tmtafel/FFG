@@ -99,8 +99,8 @@ export class FirebaseService {
   }
 
   async startDraft(draftId: string) {
-    await this.db.collection('draft').doc(draftId).set({
-      startHasDraft: true
+    await this.db.collection('draft').doc(draftId).update({
+      draftHasStarted: true
     });
   }
 }

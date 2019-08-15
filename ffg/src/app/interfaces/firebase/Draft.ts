@@ -24,7 +24,7 @@ export class Draft {
             end: this.end,
             year: this.year,
             id: this.id,
-            startDraft: this.draftHasStarted
+            draftHasStarted: this.draftHasStarted
         };
     }
 }

@@ -19,7 +19,7 @@ export class DetailsComponent implements OnInit {
   draftStarted: false;
 
   constructor(private route: ActivatedRoute, private router: Router, private firebaseService: FirebaseService) {
-    this.users = this.firebaseService.getUsers();
+
   }
 
   ngOnInit() {
@@ -28,6 +28,11 @@ export class DetailsComponent implements OnInit {
       this.firebaseService.getDraftById(this.draftId).subscribe(draft => {
         if (draft) {
           this.draft = draft;
+          if (draft.draftHasStarted) {
+
+          } else {
+            this.users = this.firebaseService.getUsers();
+          }
         } else {
           this.router.navigate(['/draft']);
         }
