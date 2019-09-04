@@ -1,0 +1,6 @@
+
+<div *ngIf="loaded" class="user">
+  <h5>{{user.email}}</h5>
+  <button *ngIf="isAdmin" class="btn btn-primary btn-sm" (click)="removeAdmin()">Remove from Admin</button>
+  <button *ngIf="!isAdmin" class="btn btn-primary btn-sm" (click)="addAdmin()">Set as Admin</button>
+</div>

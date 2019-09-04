@@ -2,15 +2,28 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
-import firebase from 'firebase';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  user: User;
-  constructor(public afAuth: AngularFireAuth, public router: Router) {
-    this.afAuth.authState.subscribe(this.firebaseAuthChangeListener);
+  private user: Observable<firebase.User>;
+  private userDetails: firebase.User = null;
+
+  constructor(public afAuth: AngularFireAuth, public router: Router, private fns: AngularFireFunctions) {
+    this.user = afAuth.authState;
+    this.user.subscribe(
+      (user) => {
+        if (user) {
+          this.userDetails = user;
+          console.log(this.userDetails);
+        } else {
+          this.userDetails = null;
+        }
+      }
+    );
   }
 
   async login(email: string, password: string) {
@@ -25,19 +38,37 @@ export class AuthService {
   async logout() {
     await this.afAuth.auth.signOut();
     localStorage.removeItem('user');
+    localStorage.removeItem('admin');
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null;
+    if (this.userDetails == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
-  private firebaseAuthChangeListener(user) {
-    if (user) {
-      this.user = user;
-      localStorage.setItem('user', JSON.stringify(this.user));
-    } else {
-      localStorage.setItem('user', null);
+  get isAdmin(): boolean {
+    try {
+      return JSON.parse(localStorage.getItem('admin'));
+    } catch (error) {
+      return false;
     }
+  }
+
+  public getAllUsers() {
+    const callable = this.fns.httpsCallable('getUsers');
+    return callable({});
+  }
+
+  addAdmin(e: string): Observable<any> {
+    const callable = this.fns.httpsCallable('addAdmin');
+    return callable({ email: e });
+  }
+
+  removeAdmin(e: string): Observable<any> {
+    const callable = this.fns.httpsCallable('removeAdmin');
+    return callable({ email: e });
   }
 }
