@@ -22,16 +22,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.isLoggedIn) {
-      this.authService.afAuth.user.subscribe(e => {
-        if (e !== null) {
-          this.email = e.email;
-          if (e.displayName) {
-            this.display = e.displayName;
-          } else {
-            this.display = e.email;
-          }
-        }
-      });
     }
   }
 
