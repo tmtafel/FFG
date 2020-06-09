@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "ffg"
+  "defaultProject": "ffg",
+  "cli": {
+    "analytics": false
+  }
 }
