@@ -4,32 +4,23 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Trn } from 'src/app/interfaces/ScheduleData';
 import { AuthService } from '../auth/auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserResponse } from 'src/app/interfaces/UserResponse';
 import { Draft } from 'src/app/interfaces/firebase/Draft';
 import { Team } from 'src/app/interfaces/team';
 import { User } from 'firebase';
 import { PgatourService } from '../pgatour/pgatour.service';
 import { Player } from 'src/app/interfaces/PgaData';
-import { forEach } from '@angular/router/src/utils/collection';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': '*'
-  })
-};
 @Injectable({
   providedIn: 'root'
 })
 
 export class FirebaseService {
 
-  constructor(public db: AngularFirestore, public auth: AuthService, private http: HttpClient, private pgaTourService: PgatourService) {
+  constructor(public db: AngularFirestore, public auth: AuthService, private pgaTourService: PgatourService) {
   }
 
-  getUsers() {
-    // tslint:disable-next-line:max-line-length
-    return this.http.get<UserResponse>('https://us-central1-ffgolf.cloudfunctions.net/getAllUsers', httpOptions).pipe(map(res => res.users));
+  getUsers(): Observable<User[]> {
+    return this.db.collection<User>('users').valueChanges();
   }
   getAllDrafts(): Observable<DocumentChangeAction<Draft>[]> {
     return this.db.collection<Draft>('draft').snapshotChanges();

@@ -1,0 +1,5 @@
+<ul class="list-group py-4" *ngIf="users">
+  <li class="list-group-item" *ngFor="let user of users">
+    <app-user [user]="user"></app-user>
+  </li>
+</ul>

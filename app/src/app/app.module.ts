@@ -18,16 +18,23 @@ import * as firebaseui from 'firebaseui';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 
 import { environment } from '../environments/environment';
 import { DraftModule } from './draft/draft.module';
+import { UsersModule } from './users/users.module';
 import { HeaderComponent } from './header/header.component';
+import { AuthService } from './services/auth/auth.service';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
   signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    {
+      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      authMethod: 'https://accounts.google.com',
+      clientId: '328826912224-sgghc1dcimi57pr8ni9g90ofs6fhh6da.apps.googleusercontent.com'
+    },
   ],
   tosUrl: 'https://tinkletons.com/',
   privacyPolicyUrl: 'https://tinkletons.com/'
@@ -44,15 +51,16 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireFunctionsModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    DraftModule
+    DraftModule,
+    UsersModule
   ],
-  providers: [
-  ],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
