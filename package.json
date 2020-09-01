@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/tmtafel/FFG/issues"
   },
-  "homepage": "https://github.com/tmtafel/FFG#readme"
+  "homepage": "https://github.com/tmtafel/FFG#readme",
+  "dependencies": {
+    "firebase-functions": "^3.11.0",
+    "json-diff": "^0.5.4"
+  }
 }

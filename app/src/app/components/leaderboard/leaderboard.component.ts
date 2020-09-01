@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PgatourService } from 'src/app/services/pgatour/pgatour.service';
-import { FirebaseService } from 'src/app/services/firebase/firebase.service';
 import { Leaderboard } from 'src/app/interfaces/PgaData';
+import { FirebaseService } from 'src/app/services/firebase/firebase.service';
+import { PgatourService } from 'src/app/services/pgatour/pgatour.service';
 
 @Component({
   selector: 'app-leaderboard',

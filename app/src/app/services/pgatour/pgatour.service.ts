@@ -1,9 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of, pipe } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { PGAData, Player } from 'src/app/interfaces/PgaData';
-import { ConvertSchedule, Trn, ScheduleData } from 'src/app/interfaces/ScheduleData';
+import { ConvertSchedule, ScheduleData, Trn } from 'src/app/interfaces/ScheduleData';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class PgatourService {
   constructor(private http: HttpClient) { }
 
   getLeaderbaord(tournamentId: any): Observable<PGAData> {
+    debugger;
     return this.http.get<PGAData>('https://statdata.pgatour.com/r/' + tournamentId.toString() + '/leaderboard-v2mini.json')
       .pipe(
         map(json => json),
