@@ -1,15 +1,9 @@
-
-
 <div *ngIf="leaderboard">
-  <!-- <div class="row">
-    <h4 class="col-12 text-center">{{year}} {{tournamentName}}</h4>
-  </div>
-  <div class="row">
-    <h6 class="col-12 text-right small">{{lastUpdated | date:'h:mm a '}}</h6>
-  </div> -->
   <ul class="list list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let player of leaderboard.players">
-      <app-player [player]="player"></app-player>
+    <li class="list-group-item" *ngFor="let competitor of leaderboard.competitors">
+      <p class="name m-0">{{competitor.athlete.displayName}}</p>
+      <p class="score m-0">{{competitor.score.displayValue}}</p>
+      <p class="score m-0">{{competitor.sortOrder}}</p>
     </li>
   </ul>
 </div>

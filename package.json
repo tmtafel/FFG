@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm start --prefix app"
+    "start": "npm start --prefix app-v2"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/tmtafel/FFG#readme",
   "dependencies": {
+    "firebase-admin": "^9.3.0",
     "firebase-functions": "^3.11.0",
     "json-diff": "^0.5.4"
   }

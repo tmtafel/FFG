@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -27,7 +26,7 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try {
-      await this.afAuth.auth.signInWithEmailAndPassword(email, password);
+      await this.afAuth.signInWithEmailAndPassword(email, password);
       return this.afAuth;
     } catch (e) {
       return e;
@@ -35,7 +34,7 @@ export class AuthService {
   }
 
   async logout() {
-    await this.afAuth.auth.signOut();
+    await this.afAuth.signOut();
     localStorage.removeItem('user');
     localStorage.removeItem('admin');
   }
