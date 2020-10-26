@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 import { User } from 'firebase';
 import { Observable } from 'rxjs';
 import { Draft } from 'src/app/interfaces/Draft';
