@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Competition, Convert } from '../interfaces/Espn';
+import { Competition, EspnConvert } from '../interfaces/Espn';
 import { EspnService } from '../services/espn/espn.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class LeaderboardComponent implements OnInit {
       const tournamentId = stmp.tournaments.pop().id;
       const season = stmp.season;
       this.espnService.getTournament(season, tournamentId).subscribe(espn => {
-        const evt = Convert.toEvent(espn.json);
+        const evt = EspnConvert.toEspnEventData(espn.json);
         const competition = evt.competitions[0];
         competition.competitors.sort((a, b) => a.sortOrder - b.sortOrder);
         this.leaderboard = competition;
