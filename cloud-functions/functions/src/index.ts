@@ -2,8 +2,8 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import * as https from 'https';
 
-import { EspnConvert, Event } from '../../../shared/Espn';
-import { FirebaseEvent, GetSitemap } from '../../../shared/Sitemap';
+import { ActivePlayer, EspnConvert, Event } from './Espn';
+import { ConvertSitemap, FirebaseEvent, Sitemap } from './Sitemap';
 
 admin.initializeApp();
 export const db = admin.firestore();
@@ -36,7 +36,6 @@ export const TournamentDataChanged = functions.firestore.document('tournaments/{
         } catch (err) {
             reject(err);
         }
-
     });
 });
 
@@ -53,6 +52,31 @@ export const TournamentDataCreated = functions.firestore.document('tournaments/{
     });
 });
 
+export const PlayerDataCreated = functions.firestore.document('tournaments/{year}/events/{tournamentId}/players/{playerId}').onCreate((newData, context) => {
+    console.log(`PlayerDataCreated hit`);
+    try {
+        const nd = JSON.stringify(newData);
+        console.log(`newData=${nd}`);
+    } catch (err) {
+        console.log(`Could not stringify newData`);
+    }
+    try {
+        const ctx = JSON.stringify(context);
+        console.log(`context=${ctx}`);
+    } catch (err) {
+        console.log(`Could not stringify context`);
+    }
+});
+
+export const PlayerDataChanged = functions.firestore.document('tournaments/{year}/events/{tournamentId}/players/{playerId}').onUpdate((change) => {
+    console.log(`PlayerDataChanged hit`);
+    try {
+        const chng = JSON.stringify(change);
+        console.log(`change=${chng}`);
+    } catch (err) {
+        console.log(`Could not stringify change`);
+    }
+});
 
 export const UpdateTournamentPlayers = functions.https.onRequest(async (req, res) => {
     try {
@@ -79,12 +103,14 @@ async function UpdatePlayersForTournament(evt: Event): Promise<FirebaseFirestore
     return new Promise(async (resolve, reject) => {
         try {
             const playerPromises: Promise<FirebaseFirestore.WriteResult>[] = [];
-            evt.competitions[0].competitors.forEach(player => {
-                const playerUrl = `tournaments/${evt.season.year}/events/${evt.id}/players/${player.id}`;
-                const playerPromise = db.doc(playerUrl).set(player);
+            const competitors = evt.competitions[0].competitors;
+            competitors.forEach(competitor => {
+                const playerUrl = `tournaments/${evt.season.year}/events/${evt.id}/players/${competitor.id}`;
+                const activePlayer = new ActivePlayer(competitor);
+                const playerPromise = db.doc(playerUrl).set(activePlayer);
                 playerPromises.push(playerPromise);
             });
-            const playerPromisesResult = await Promise.all(playerPromises)
+            const playerPromisesResult = await Promise.all(playerPromises);
             resolve(playerPromisesResult);
         } catch (err) {
             console.error(err);
@@ -208,4 +234,22 @@ export async function FetchEspnData(): Promise<Event> {
         });
         request.end();
     });
+}
+
+export async function GetSitemap(year: number): Promise<Sitemap> {
+    return new Promise<Sitemap>(async (resolve, reject) => {
+        try {
+            const sitemapDoc = await db.doc(`tournaments/${year.toString()}`).get();
+            const sitemap = sitemapDoc.exists ? sitemapDoc.data() as Sitemap : GetNewSitemap(year);
+            resolve(sitemap);
+        } catch (err) {
+            reject(err);
+            return err;
+        }
+    });
+}
+
+
+export function GetNewSitemap(year: number) {
+    return ConvertSitemap.toSitemap(`{"season":${year},"tournaments":[]}`);
 }

@@ -260,7 +260,34 @@ export class EspnConvert {
         return JSON.parse(json);
     }
 
+    public static toEspnCompetitor(json: string): Competitor {
+        return JSON.parse(json);
+    }
+
     public static espnDataToJson(value: EspnData): string {
         return JSON.stringify(value);
     }
+}
+
+export class ActivePlayer {
+    id: string;
+    score: Score;
+    sortOrder: number;
+
+    constructor(competitor: Competitor) {
+        this.id = competitor.id;
+        this.score = competitor.score;
+        this.sortOrder = competitor.sortOrder;
+    }
+
+    GetInterface(): IActivePlayer {
+        return this;
+    }
+
+}
+
+export interface IActivePlayer {
+    id: string;
+    score: Score;
+    sortOrder: number;
 }

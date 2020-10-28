@@ -1,6 +1,6 @@
 import { firestore } from 'firebase-admin';
 
-import { db } from '../cloud-functions/functions/src/index';
+import { db } from './index';
 
 export async function GetSitemap(year: number): Promise<Sitemap> {
     return new Promise<Sitemap>(async (resolve, reject) => {
