@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "ffgolf"
+  "targets": {
+    "ffgolf": {
+      "hosting": {
+        "app": [
+          "ffgolf"
+        ]
+      }
+    }
   }
 }

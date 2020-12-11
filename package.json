@@ -1,0 +1,26 @@
+{
+  "name": "FFG",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm start --prefix app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmtafel/FFG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmtafel/FFG/issues"
+  },
+  "homepage": "https://github.com/tmtafel/FFG#readme",
+  "dependencies": {
+    "firebase-admin": "^9.3.0",
+    "firebase-functions": "^3.11.0",
+    "json-diff": "^0.5.4"
+  }
+}
