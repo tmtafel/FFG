@@ -1,3 +1,34 @@
+import * as https from 'https';
+
+const espnUrl = new URL('https://site.web.api.espn.com/apis/site/v2/sports/golf/leaderboard?league=pga');
+
+export async function FetchEspnData(): Promise<Event> {
+    return new Promise<Event>((resolve, reject) => {
+        const request = https.get(espnUrl, (res) => {
+            let data = '';
+            res.on('data', (d) => {
+                data += d;
+            });
+            res.on('end', async () => {
+                try {
+                    const espnData = EspnConvert.toEspnData(data);
+                    if (espnData.events[0] !== null) {
+                        resolve(espnData.events[0]);
+                    } else {
+                        reject("no events found");
+                    }
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        });
+        request.on('error', (err) => {
+            reject(err);
+        });
+        request.end();
+    });
+}
+
 export interface Espn {
     json: string;
     updated: string;
@@ -267,26 +298,13 @@ export class EspnConvert {
     public static espnDataToJson(value: EspnData): string {
         return JSON.stringify(value);
     }
+
+    public static toEspnActivePlayer(json: string): ActivePlayer {
+        return JSON.parse(json);
+    }
 }
 
-export class ActivePlayer {
-    id: string;
-    score: Score;
-    sortOrder: number;
-
-    constructor(competitor: Competitor) {
-        this.id = competitor.id;
-        this.score = competitor.score;
-        this.sortOrder = competitor.sortOrder;
-    }
-
-    GetInterface(): IActivePlayer {
-        return this;
-    }
-
-}
-
-export interface IActivePlayer {
+export interface ActivePlayer {
     id: string;
     score: Score;
     sortOrder: number;

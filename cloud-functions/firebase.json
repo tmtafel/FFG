@@ -15,8 +15,8 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/tournaments",
+        "function": "tournaments"
       }
     ]
   },
