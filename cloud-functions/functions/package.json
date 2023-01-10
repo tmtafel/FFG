@@ -17,7 +17,7 @@
     "@types/request-promise": "^4.1.46",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "firebase-admin": "^9.3.0",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.10.0",
     "https": "^1.0.0",
     "json-diff": "^0.5.4",
