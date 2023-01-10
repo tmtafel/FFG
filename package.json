@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/tmtafel/FFG#readme",
   "dependencies": {
-    "firebase-admin": "^9.3.0",
+    "firebase-admin": "^11.4.1",
     "firebase-functions": "^3.11.0",
     "json-diff": "^0.5.4"
   }
